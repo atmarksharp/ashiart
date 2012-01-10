@@ -17,6 +17,7 @@
       var N = 32;
       var map = [];
       var whitening = false;
+      var connected = false;
 
       for(var i=0;i<60;i++){
         map.push([]);
@@ -42,6 +43,8 @@
             $(this).attr("data-val", val);
             $(this).css("background-color",col);
           });
+
+          connected = true;
         });
 
         socket.on('change', function (data) {
@@ -61,6 +64,8 @@
         });
 
         $(".box").mouseover(function(){
+          if(!connected) return;
+
           var val = parseInt($(this).attr("data-val"));
           var x = parseInt($(this).attr("data-x"));
           var y = parseInt($(this).attr("data-y"));
