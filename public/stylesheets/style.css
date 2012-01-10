@@ -1,0 +1,26 @@
+* {
+  border: 0;
+}
+
+body {
+  padding: 10px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.row {
+  clear:both;
+  float: none;
+  margin: 0px;
+}
+
+.box {
+  float: left;
+  margin: 1px;
+  width: 10px;
+  height: 10px;
+  background: #FFF;
+}

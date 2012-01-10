@@ -1,0 +1,10 @@
+<% function makebox(n, m){ %>
+<% for(var j=0; j<m; j++){ %>
+<div class="row">
+  <% for(var i=0; i<n; i++){ %>
+    <div class="box" data-x="<%=i%>" data-y="<%=j%>" data-val="0"></div>
+  <% } %>
+</div>
+<% }} %>
+
+<% makebox(60,40); %>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      function calcColor(n){
+        return n<32 ? 255-n*8 : 255-(64-n)*8;
+      }
+
+      var N = 64;
+      var map = [];
+
+      for(var i=0;i<60;i++){
+        map.push([]);
+      }
+
+      $(document).ready(function(){
+
+        var socket = io.connect('http://localhost');
+
+        socket.on('init', function (data) {
+
+          $(".box").each(function(){
+            var x = parseInt($(this).attr("data-x"));
+            var y = parseInt($(this).attr("data-y"));
+            var val = data[x][y];
+            var c = calcColor(val);
+            var col = "rgb(" + c +","+ c +","+ c + ")";
+
+            map[x][y] = $(this);
+
+            $(this).attr("data-val", val);
+            $(this).css("background-color",col);
+          });
+        });
+
+        socket.on('change', function (data) {
+          var x = data["x"];
+          var y = data["y"];
+          var val = data["val"];
+          var c = calcColor(val);
+          var col = "rgb(" + c +","+ c +","+ c + ")";
+          var obj = map[x][y];
+
+          obj.attr("data-val", val);
+          obj.css("background-color",col);
+        });
+
+        $(".box").mouseover(function(){
+          var val = parseInt($(this).attr("data-val"));
+          var x = parseInt($(this).attr("data-x"));
+          var y = parseInt($(this).attr("data-y"));
+
+          val = val==N ? 0 : val+1;
+
+          socket.emit('paint', { x: x, y: y, val: val });
+
+          var c = calcColor(val);
+          var col = "rgb(" + c +","+ c +","+ c + ")";
+          $(this).attr("data-val",val);
+          $(this).css("background-color",col);
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+    <%- body %>
+  </body>
+</html>
