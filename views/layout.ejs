@@ -10,11 +10,13 @@
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
       function calcColor(n){
-        return n<32 ? 255-n*8 : 255-(64-n)*8;
+        return 255-n*8;
+        //return n<32 ? 255-n*8 : 255-(64-n)*8;
       }
 
-      var N = 64;
+      var N = 32;
       var map = [];
+      var whitening = false;
 
       for(var i=0;i<60;i++){
         map.push([]);
@@ -22,7 +24,7 @@
 
       $(document).ready(function(){
 
-        var socket = io.connect('http://ashiart.herokuapp.com');
+        var socket = io.connect(window.location.href);
 
         socket.on('init', function (data) {
 
@@ -54,12 +56,20 @@
           obj.css("background-color",col);
         });
 
+        $("#whitening").change(function(){
+          whitening = $(this).attr("checked") ? true : false;
+        });
+
         $(".box").mouseover(function(){
           var val = parseInt($(this).attr("data-val"));
           var x = parseInt($(this).attr("data-x"));
           var y = parseInt($(this).attr("data-y"));
 
-          val = val==N ? 0 : val+1;
+          if(whitening){
+            val = val<=0 ? 0 : val-1;
+          }else{
+            val = val>=N ? N : val+1;
+          }
 
           socket.emit('paint', { x: x, y: y, val: val });
 
