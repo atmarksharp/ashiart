@@ -53,6 +53,6 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('paint', function (data) {
     map[data['x']][data['y']] = data['val'];
-    io.sockets.emit('change', data);
+    socket.broadcast.emit('change', data);
   });
 });
