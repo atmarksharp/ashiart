@@ -36,7 +36,6 @@ app.get('/', routes.index);
 app.listen(port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
-app.listen(port);
 var socketIO = require('socket.io');
 var io = socketIO.listen(app);
 
