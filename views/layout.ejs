@@ -19,9 +19,11 @@
 
       $(document).ready(function(){
 
-        var socket = io.connect('http://ashiart.herokuapp.com/');
+        var socket = io.connect('http://ashiart.herokuapp.com');
 
         socket.on('init', function (data) {
+
+          $("#loading").fadeOut(500);
 
           $(".box").each(function(){
             var x = parseInt($(this).attr("data-x"));
