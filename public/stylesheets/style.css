@@ -11,15 +11,24 @@ a {
   color: #00B7FF;
 }
 
+#container {
+  border: #BBB 1px solid;
+  width: 720px;
+  height: 480px;
+  margin: 20px auto;
+}
+
 .row {
-  clear:both;
+  clear: both;
   float: none;
   margin: 0px;
+  padding: 0px;
 }
 
 .box {
   float: left;
   margin: 1px;
+  padding: 0px;
   width: 10px;
   height: 10px;
   background: #FFF;

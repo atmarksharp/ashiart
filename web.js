@@ -43,7 +43,7 @@ var map = [];
 
 for(var i=0; i<60; i++){
   map.push([]);
-  for(var j=0; j<60; j++){
+  for(var j=0; j<40; j++){
     map[i].push(0);
   }
 }

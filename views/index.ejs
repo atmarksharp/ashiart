@@ -1,6 +1,6 @@
 <% function makebox(n, m){ %>
 <% for(var j=0; j<m; j++){ %>
-<div class="row">
+<div class="row" data-y="<%=j%>" >
   <% for(var i=0; i<n; i++){ %>
     <div class="box" data-x="<%=i%>" data-y="<%=j%>" data-val="0"></div>
   <% } %>
@@ -8,4 +8,6 @@
 <% }} %>
 
 <div id="loading"><img src="/images/connecting.png"/><img src="/images/loading.gif"/></div>
+<div id="container">
 <% makebox(60,40); %>
+</div>
